@@ -25,9 +25,8 @@ stages:
           publishJUnitResults: true
           testResultsFiles: '**/TEST-*.xml'
           goals: 'package'
-      - task: DockerCompose@0
-        displayName: Container registry login
-        inputs:
-          containerregistrytype: Azure Container Registry
-          azureSubscriptionEndpoint: $(azureSubscriptionEndpoint)
-          azureContainerRegistry: $(azureContainerRegistry)
+     - task: DockerCompose@0
+       displayName: Container registry login
+       inputs:
+          containerregistrytype: Container Registry
+          dockerRegistryEndpoint: Contoso
