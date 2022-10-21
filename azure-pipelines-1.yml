@@ -28,5 +28,9 @@ stages:
       - task: DockerCompose@0
         displayName: Container registry login
         inputs:
-          containerregistrytype: Container Registry
-          dockerRegistryEndpoint: Contoso
+          containerregistry: 'AnandHub'
+          repository: 'Anandasb149/Docker_Jenkins'
+          command: 'build'
+          dockercomposefile: '**/dockercompose'
+          tag: '$(tag)'
+          
