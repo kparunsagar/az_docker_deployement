@@ -14,6 +14,14 @@ stages:
     pool:
       vmImage: ubuntu-latest
     steps:
+    - task: AzureResourceGroupDeployment@2
+      displayName: 'Azure Deployment:Create Azure Container Registry'
+      inputs:
+        azureSubscription: 'AzureSC'
+        resourceGroupName: '$(rgName)'
+        location: $(location)
+        csmFile: '$(System.DefaultWorkingDirectory)/**/containerRegistry-template.json'
+        overrideParameters: '-registryName "$(acrName)" -registryLocation "$(location)" -registrySku standard'
 
     
     - task: DockerCompose@0
