@@ -6,28 +6,32 @@
 trigger:
 - master
 
-pool:
-  vmImage: ubuntu-latest
-
 stages:
 - stage: Build
+  displayName: Build
+  jobs:
+  - job: buildd
+    displayName: Buildd
+    pool:
+      vmImage: ubuntu-latest
     steps:
-      - task: Maven@3
-        inputs:
-          mavenPomFile: 'pom.xml'
-          mavenOptions: '-Xmx3072m'
-          javaHomeOption: 'JDKVersion'
-          jdkVersionOption: '1.8'
-          jdkArchitectureOption: 'x64'
-          publishJUnitResults: true
-          testResultsFiles: '**/TEST-*.xml'
-          goals: 'package'
-      - task: DockerCompose@0
-        displayName: Container registry login
-        inputs:
-          containerregistry: 'AnandHub'
-          repository: 'Anandasb149/Docker_Jenkins'
-          command: 'build'
-          dockercomposefile: '**/dockercompose'
-          tag: '$(tag)'
-          
+    - task: Maven@3
+      inputs:
+        mavenPomFile: 'pom.xml'
+        mavenOptions: '-Xmx3072m'
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.8'
+        jdkArchitectureOption: 'x64'
+        publishJUnitResults: true
+        testResultsFiles: '**/TEST-*.xml'
+        goals: 'package'
+    
+    - task: DockerCompose@0
+      inputs:
+        containerregistrytype: 'Container Registry'
+        dockerRegistryEndpoint: 'AnandHub'
+        dockerComposeFile: '**/docker-compose.yml'
+        action: 'Run a Docker Compose command'
+        
+              
+      
