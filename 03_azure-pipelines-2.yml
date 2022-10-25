@@ -4,6 +4,14 @@
 # https://aka.ms/yaml
 trigger:
 - master
+variables:
+  buildConfiguration: 'Release'
+  location: 'West US 2'
+  acrHostName: 'cswebappdocker004acr.azurecr.io'
+  acrName: 'cswebappdocker004acr'
+  rgName: 'cswebappdocker004-rg'
+  imageName: 'cswebappdocker004'
+  webAppName: 'cswebappdocker004'
 
 stages:
 - stage: Build
@@ -13,8 +21,9 @@ stages:
     displayName: Buildd
     pool:
       vmImage: ubuntu-latest
+
     steps:
-    - task: AzureResourceGroupDeployment@2
+    - task: AzureResourceGroupDeployment@2 
       displayName: 'Azure Deployment:Create Azure Container Registry'
       inputs:
         azureSubscription: 'AnandHub'
@@ -31,3 +40,23 @@ stages:
         dockerComposeFile: '**/docker-compose.yml'
         action: 'Run a Docker Compose command'
         dockerComposeCommand: 'build'
+    
+      # Push container image
+    - task: Docker@1
+      displayName: 'Push container image'
+      inputs:
+        azureSubscriptionEndpoint: 'AzureSC'
+        azureContainerRegistry: '$(acrHostName)'
+        command: 'Push an image'
+        imageName: '$(imageName):$(Build.BuildId)'
+    
+     # Copy ARM templates
+    - task: CopyFiles@2
+      displayName: 'Copy ARM templates'
+      inputs:
+        SourceFolder: ArmTemplates
+        TargetFolder: '$(build.artifactstagingdirectory)'
+
+    # Publish the app as an artifact
+    - publish: $(Build.StagingDirectory)
+      artifact: app
