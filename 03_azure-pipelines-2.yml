@@ -4,6 +4,7 @@
 # https://aka.ms/yaml
 trigger:
 - master
+
 variables:
   buildConfiguration: 'Release'
   location: 'West US 2'
@@ -26,7 +27,7 @@ stages:
     - task: AzureResourceGroupDeployment@2 
       displayName: 'Azure Deployment:Create Azure Container Registry'
       inputs:
-        azureSubscription: 'AnandHub'
+        azureSubscription: 'AzureSC'
         resourceGroupName: '$(rgName)'
         location: $(location)
         csmFile: '$(System.DefaultWorkingDirectory)/**/containerRegistry-template.json'
