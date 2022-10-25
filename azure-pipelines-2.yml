@@ -56,26 +56,7 @@ stages:
     
     - upload: $(Build.ArtifactStagingDirectory)
         artifact:drop
-  - job:  
-  - deployment: VMDeploy
-    displayName: web
-    environment:
-      name:  <environment name>
-      resourceType: VirtualMachine
-      tags: web
-  - job:
-  - deployment: VMDeploy
-    displayName: web
-    pool:
-      vmImage: 'Ubuntu-latest'
-    environment:
-      name: <environment name>
-      resourceType: VirtualMachine
-    strategy:
-        runOnce:
-          deploy:
-            steps:
-            - script: echo my first deployment
+
   - job: 
   - deployment: VMDeploy
     displayName: web
