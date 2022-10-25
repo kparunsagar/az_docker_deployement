@@ -11,7 +11,7 @@ variables:
   location: 'West US 2'
   acrHostName: 'cswebappdocker004acr.azurecr.io'
   acrName: 'cswebappdocker004acr'
-  rgName: 'cswebappdocker004-rg'
+  rgName: 'Docdep'
   imageName: 'cswebappdocker004'
   webAppName: 'cswebappdocker004'
 
