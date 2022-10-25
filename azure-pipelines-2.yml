@@ -55,6 +55,6 @@ stages:
         TargetFolder: '$(build.artifactstagingdirectory)'
     
     - upload: $(Build.ArtifactStagingDirectory)
-        artifact:drop
+      artifact: drop
 
   
