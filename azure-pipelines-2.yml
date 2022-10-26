@@ -38,6 +38,7 @@ stages:
         resourceGroupName: 'deploydoc'
         location: 'East US'
         templateLocation: 'Linked artifact'
+        csmFile: '$(System.DefaultWorkingDirectory)/**/containerRegistry-template.json'
         deploymentMode: 'Incremental'
     
     - task: Maven@4
