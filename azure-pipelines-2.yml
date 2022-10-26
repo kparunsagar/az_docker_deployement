@@ -29,14 +29,18 @@ stages:
     pool:
       vmImage: $(vmImageName)
     steps:
+
     - task: AzureResourceGroupDeployment@2
       displayName: 'Azure Deployment:Create Azure Container Registry'
       inputs:
         azureSubscription: 'AzureSC'
-        resourceGroupName: '$(rgName)'
-        location: $(location)
+        action: 'Create Or Update Resource Group'
+        resourceGroupName: 'Docdep'
+        location: 'Central US'
+        templateLocation: 'Linked artifact'
         csmFile: '$(System.DefaultWorkingDirectory)/**/containerRegistry-template.json'
-        overrideParameters: '-registryName "$(acrName)" -registryLocation "$(location)" -registrySku standard'  
+        overrideParameters: '-registryName "$(acrName)" -registryLocation "$(location)" -registrySku standard'
+        deploymentMode: 'Incremental'
     - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml'
