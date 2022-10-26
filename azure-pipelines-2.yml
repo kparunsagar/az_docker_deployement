@@ -35,11 +35,10 @@ stages:
       inputs:
         azureSubscription: 'AzureSC'
         action: 'Create Or Update Resource Group'
-        resourceGroupName: 'Docdep'
+        resourceGroupName: 'DefaultResourceGroup-CUS'
         location: 'Central US'
         templateLocation: 'Linked artifact'
         csmFile: '$(System.DefaultWorkingDirectory)/**/containerRegistry-template.json'
-        overrideParameters: '-registryName "$(acrName)" -registryLocation "$(location)" -registrySku standard'
         deploymentMode: 'Incremental'
     - task: Maven@4
       inputs:
