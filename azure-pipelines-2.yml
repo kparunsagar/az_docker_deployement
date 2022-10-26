@@ -30,13 +30,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
 
-    - task: AzureWebApp@1
-      inputs:
-        azureSubscription: 'AzureSC'
-        appType: 'webApp'
-        appName: 'AnandRepo'
-        package: '$(System.DefaultWorkingDirectory)/**/*.zip'
-        deploymentMethod: 'auto'
+    
     - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml'
@@ -48,14 +42,7 @@ stages:
         mavenAuthenticateFeed: false
         effectivePomSkip: false
         sonarQubeRunAnalysis: false
-    - task: DockerCompose@0
-      inputs:
-        containerregistrytype: 'Azure Container Registry'
-        azureSubscription: 'AzureSC'
-        azureContainerRegistry: '{"loginServer":"anandhub.azurecr.io", "id" : "/subscriptions/f3f0b402-1498-4537-9728-704a780011a0/resourceGroups/Docdep/providers/Microsoft.ContainerRegistry/registries/AnandHub"}'
-        dockerComposeFile: '**/docker-compose.yml'
-        action: 'Run a Docker Compose command'
-        dockerComposeCommand: 'build'
+   
     - task: CopyFiles@2
       inputs:
         SourceFolder: '$(agent.builddirectory)'
@@ -64,5 +51,21 @@ stages:
     
     - upload: $(Build.ArtifactStagingDirectory)
       artifact: drop
+    - task: AzureWebApp@1
+      inputs:
+        azureSubscription: 'AzureSC'
+        appType: 'webApp'
+        appName: 'AnandRepo'
+        package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+        deploymentMethod: 'auto'
+
+    - task: DockerCompose@0
+      inputs:
+        containerregistrytype: 'Azure Container Registry'
+        azureSubscription: 'AzureSC'
+        azureContainerRegistry: '{"loginServer":"anandhub.azurecr.io", "id" : "/subscriptions/f3f0b402-1498-4537-9728-704a780011a0/resourceGroups/Docdep/providers/Microsoft.ContainerRegistry/registries/AnandHub"}'
+        dockerComposeFile: '**/docker-compose.yml'
+        action: 'Run a Docker Compose command'
+        dockerComposeCommand: 'build'
 
   
