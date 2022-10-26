@@ -29,7 +29,16 @@ stages:
     pool:
       vmImage: $(vmImageName)
     steps:
-
+    - task: AzureResourceManagerTemplateDeployment@3
+      inputs:
+        deploymentScope: 'Resource Group'
+        azureResourceManagerConnection: 'AzureSC'
+        subscriptionId: 'f3f0b402-1498-4537-9728-704a780011a0'
+        action: 'Create Or Update Resource Group'
+        resourceGroupName: 'deploydoc'
+        location: 'East US'
+        templateLocation: 'Linked artifact'
+        deploymentMode: 'Incremental'
     
     - task: Maven@4
       inputs:
