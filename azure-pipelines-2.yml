@@ -30,16 +30,13 @@ stages:
       vmImage: $(vmImageName)
     steps:
 
-    - task: AzureResourceGroupDeployment@2
-      displayName: 'Azure Deployment:Create Azure Container Registry'
+    - task: AzureWebApp@1
       inputs:
         azureSubscription: 'AzureSC'
-        action: 'Create Or Update Resource Group'
-        resourceGroupName: 'DefaultResourceGroup-CUS'
-        location: 'Central US'
-        templateLocation: 'Linked artifact'
-        csmFile: '$(System.DefaultWorkingDirectory)/**/containerRegistry-template.json'
-        deploymentMode: 'Incremental'
+        appType: 'webApp'
+        appName: 'AnandRepo'
+        package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+        deploymentMethod: 'auto'
     - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml'
