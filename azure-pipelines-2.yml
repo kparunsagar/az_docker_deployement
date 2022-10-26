@@ -51,6 +51,8 @@ stages:
     
     - upload: $(Build.ArtifactStagingDirectory)
       artifact: drop
+
+    - task: PublishBuildArtifacts@1
     - task: AzureWebApp@1
       inputs:
         azureSubscription: 'AzureSC'
