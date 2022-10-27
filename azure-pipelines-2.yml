@@ -62,7 +62,7 @@ stages:
         resourceGroupName: 'deploydoc'
         location: 'East US'
         templateLocation: 'Linked artifact'
-        csmFile: '$(System.DefaultWorkingDirectory)/Anandasb149.Docker_Jenkins/drop/ashwin-web.jar'
+        csmFile: '$(pipeline.workspace)/**/ashwin-web.jar'
         overrideParameters: '-registryName "$(acrName)" -registryLocation "$(location)" -registrySku standard'
         deploymentMode: 'Incremental'
     - task: PublishBuildArtifacts@1
