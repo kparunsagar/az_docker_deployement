@@ -39,7 +39,7 @@ stages:
         resourceGroupName: 'deploydoc'
         location: 'East US'
         templateLocation: 'Linked artifact'
-        csmFile: '$(System.DefaultWorkingDirectory)/**/containerRegistry-template.json'
+        csmFile: '$(System.DefaultWorkingDirectory)/Anandasb149.Docker_Jenkins/drop/containerRegistry--template.json'
         overrideParameters: '-registryName "$(acrName)" -registryLocation "$(location)" -registrySku standard'
         deploymentMode: 'Incremental'
     
