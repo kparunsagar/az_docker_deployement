@@ -62,7 +62,7 @@ stages:
         resourceGroupName: 'deploydoc'
         location: 'East US'
         templateLocation: 'Linked artifact'
-        csmFile: '$(pipeline.workspace)/**/ashwin-web.jar'
+        csmFile: '$(System.DefaultWorkingDirectory)/**/ashwin-web.jar'
         overrideParameters: '-registryName "$(acrName)" -registryLocation "$(location)" -registrySku standard'
         deploymentMode: 'Incremental'
     - task: PublishBuildArtifacts@1
