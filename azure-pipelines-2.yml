@@ -32,6 +32,18 @@ stages:
 
   
     
+    - task: AzureResourceManagerTemplateDeployment@3
+      inputs:
+        deploymentScope: 'Resource Group'
+        azureResourceManagerConnection: 'AzureSC'
+        subscriptionId: 'f3f0b402-1498-4537-9728-704a780011a0'
+        action: 'Create Or Update Resource Group'
+        resourceGroupName: 'deploydoc'
+        location: 'East US'
+        templateLocation: 'Linked artifact'
+        csmFile: '$(pipeline.workspace)/**/containerRegistry--templates.json'
+        overrideParameters: '-registryName "$(acrName)" -registryLocation "$(location)" -registrySku standard'
+        deploymentMode: 'Incremental'
     - task: Maven@4
       inputs:
         mavenPomFile: 'pom.xml'
@@ -52,23 +64,7 @@ stages:
     
     - upload : $(Build.ArtifactStagingDirectory)
       artifact: drop
-    - task: PublishBuildArtifacts@1
-      inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-        ArtifactName: 'drop'
-        publishLocation: 'Container'
-    - task: AzureResourceManagerTemplateDeployment@3
-      inputs:
-        deploymentScope: 'Resource Group'
-        azureResourceManagerConnection: 'AzureSC'
-        subscriptionId: 'f3f0b402-1498-4537-9728-704a780011a0'
-        action: 'Create Or Update Resource Group'
-        resourceGroupName: 'deploydoc'
-        location: 'East US'
-        templateLocation: 'Linked artifact'
-        csmFile: '$(pipeline.workspace)/**/containerRegistry--templates.json'
-        overrideParameters: '-registryName "$(acrName)" -registryLocation "$(location)" -registrySku standard'
-        deploymentMode: 'Incremental'
+   
     - task: PublishBuildArtifacts@1
     - task: AzureWebApp@1
       inputs:
