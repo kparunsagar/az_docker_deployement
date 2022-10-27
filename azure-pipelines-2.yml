@@ -50,9 +50,13 @@ stages:
         Contents: '**/target/*.?(jar)'
         TargetFolder: '$(build.artifactstagingdirectory)'
     
-    - upload: $(Build.ArtifactStagingDirectory)
+    - upload : $(Build.ArtifactStagingDirectory)
       artifact: drop
-      
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
     - task: AzureResourceManagerTemplateDeployment@3
       inputs:
         deploymentScope: 'Resource Group'
@@ -62,7 +66,7 @@ stages:
         resourceGroupName: 'deploydoc'
         location: 'East US'
         templateLocation: 'Linked artifact'
-        csmFile: '$(System.DefaultWorkingDirectory)/**/ashwin-web.jar'
+        csmFile: '$(pipeline.workspace)/**/containerRegistry--templates.json'
         overrideParameters: '-registryName "$(acrName)" -registryLocation "$(location)" -registrySku standard'
         deploymentMode: 'Incremental'
     - task: PublishBuildArtifacts@1
