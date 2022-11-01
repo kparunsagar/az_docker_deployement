@@ -38,8 +38,7 @@ stages:
       inputs:
         azureSubscription: 'BFSI_LGI_DevOps_Training_POC (f3f0b402-1498-4537-9728-704a780011a0)'
         ServerName: 'user124.mysql.database.azure.com'
-        DatabaseName: 'user124'
-        SqlUsername: 'user124'
+        SqlUsername: 'user124@user124.mysql.database.azure.com'
         SqlPassword: 'UUser123456@'
         TaskNameSelector: 'SqlTaskFile'
         IpDetectionMethod: 'AutoDetect'
