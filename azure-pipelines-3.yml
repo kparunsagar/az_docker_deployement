@@ -30,18 +30,19 @@ stages:
       vmImage: $(vmImageName)
 
     steps:
-    - task: Maven@3
-      displayName: 'Maven Package'
-      inputs:
-        mavenPomFile: 'pom.xml'
     - task: AzureMysqlDeployment@1
       inputs:
         azureSubscription: 'BFSI_LGI_DevOps_Training_POC (f3f0b402-1498-4537-9728-704a780011a0)'
         ServerName: 'user124.mysql.database.azure.com'
-        SqlUsername: 'user124@user124.mysql.database.azure.com'
+        SqlUsername: 'user124@user124'
         SqlPassword: 'UUser123456@'
         TaskNameSelector: 'SqlTaskFile'
         IpDetectionMethod: 'AutoDetect'
+    - task: Maven@3
+      displayName: 'Maven Package'
+      inputs:
+        mavenPomFile: 'pom.xml'
+
     - task: CopyFiles@2
       displayName: 'Copy Files to artifact staging directory'
       inputs:
