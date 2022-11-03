@@ -42,10 +42,11 @@ stages:
         sonarQubeRunAnalysis: false
     - task: Docker@2
       inputs:
-        containerRegistry: 'AnandDoc'
-        repository: 'anand'
+        containerRegistry: 'AnandHub'
+        repository: 'anand123'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
+    
     - task: CopyFiles@2
       inputs:
         SourceFolder: '$(agent.builddirectory)'
