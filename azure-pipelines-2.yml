@@ -43,6 +43,7 @@ stages:
     - task: Docker@2
       inputs:
         containerRegistry: 'AnandDoc'
+        repository: 'anand'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
     - task: CopyFiles@2
