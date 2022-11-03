@@ -40,30 +40,20 @@ stages:
         mavenAuthenticateFeed: false
         effectivePomSkip: false
         sonarQubeRunAnalysis: false
-    - task: DockerCompose@0
+    - task: Docker@2
       inputs:
-        containerregistrytype: 'Azure Container Registry'
-        azureSubscription: 'BFSI_LGI_DevOps_Training_POC (f3f0b402-1498-4537-9728-704a780011a0)'
-        azureContainerRegistry: '{"loginServer":"anandhub.azurecr.io", "id" : "/subscriptions/f3f0b402-1498-4537-9728-704a780011a0/resourceGroups/myapp-rg-anand/providers/Microsoft.ContainerRegistry/registries/AnandHub"}'
-        dockerComposeFile: '**/docker-compose.yml'
-        action: 'Run a Docker Compose command'
-        dockerComposeCommand: 'build'
+        containerRegistry: 'AnandHub'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
     - task: CopyFiles@2
       inputs:
         SourceFolder: '$(agent.builddirectory)'
-        Contents: 'drop/s/target/ashwin-web.jar'
+        Contents: '**/target/*.?(jar)'
         TargetFolder: '$(build.artifactstagingdirectory)'
     
     - upload : $(Build.ArtifactStagingDirectory)
       artifact: drop
       
-    - task: AzureWebApp@1
-      inputs:
-        azureSubscription: 'AzureSC'
-        appType: 'webApp'
-        appName: 'AnandRepo'
-        package: '$(System.DefaultWorkingDirectory)/**/*.zip'
-        deploymentMethod: 'auto'
 
    
 
