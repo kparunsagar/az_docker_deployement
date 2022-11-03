@@ -51,7 +51,7 @@ stages:
     - task: CopyFiles@2
       inputs:
         SourceFolder: '$(agent.builddirectory)'
-        Contents: '**/target/*.?(jar)'
+        Contents: 'drop/s/target/ashwin-web.jar'
         TargetFolder: '$(build.artifactstagingdirectory)'
     
     - upload : $(Build.ArtifactStagingDirectory)
