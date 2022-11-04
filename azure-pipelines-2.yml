@@ -42,7 +42,7 @@ stages:
         sonarQubeRunAnalysis: false
     - task: Docker@2
       inputs:
-        containerRegistry: 'AnandHub'
+        containerRegistry: 'DocAzure'
         repository: 'anand123'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
