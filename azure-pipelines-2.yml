@@ -61,7 +61,7 @@ stages:
         azureSubscription: 'BFSI_LGI_DevOps_Training_POC (f3f0b402-1498-4537-9728-704a780011a0)-4643'
         appType: 'webAppLinux'
         WebAppName: 'my-app-prakruthi'
-        packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+        packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.jar'
       
 
    
