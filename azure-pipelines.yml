@@ -44,3 +44,11 @@ stages:
         azureContainerRegistry: '{"loginServer":"aruncontreg.azurecr.io", "id" : "/subscriptions/f3f0b402-1498-4537-9728-704a780011a0/resourceGroups/arunRg/providers/Microsoft.ContainerRegistry/registries/arunContReg"}'
         dockerComposeFile: '**/docker-compose.yml'
         action: 'Push services'
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(agent.builddirectory)'
+        Contents: '**/target/*.?(jar)'
+        TargetFolder: '$(build.artifactstagingdirectory)'
+    
+    - upload : $(Build.ArtifactStagingDirectory)
+      artifact: drop
