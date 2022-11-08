@@ -42,5 +42,5 @@ stages:
         containerregistrytype: 'Azure Container Registry'
         azureSubscription: 'BFSI_LGI_DevOps_Training_POC (f3f0b402-1498-4537-9728-704a780011a0)'
         azureContainerRegistry: '{"loginServer":"aruncontreg.azurecr.io", "id" : "/subscriptions/f3f0b402-1498-4537-9728-704a780011a0/resourceGroups/arunRg/providers/Microsoft.ContainerRegistry/registries/arunContReg"}'
-        dockerComposeFile: '**/docker-compose.yml'
+        dockerComposeFile: '**/docker-compose.yaml'
         action: 'Push services'
