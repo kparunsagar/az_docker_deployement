@@ -40,6 +40,13 @@ stages:
         mavenAuthenticateFeed: false
         effectivePomSkip: false
         sonarQubeRunAnalysis: false
+    - task: DockerCompose@0
+      inputs:
+        containerregistrytype: 'Azure Container Registry'
+        azureSubscription: 'BFSI_LGI_DevOps_Training_POC (f3f0b402-1498-4537-9728-704a780011a0)'
+        azureContainerRegistry: '{"loginServer":"anandhub.azurecr.io", "id" : "/subscriptions/f3f0b402-1498-4537-9728-704a780011a0/resourceGroups/myapp-rg-anand/providers/Microsoft.ContainerRegistry/registries/AnandHub"}'
+        dockerComposeFile: '**/docker-compose.yml'
+        action: 'Build services'
     - task: Docker@2
       inputs:
         containerRegistry: 'DocAzure'
