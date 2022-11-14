@@ -33,15 +33,15 @@ stages:
     - task: DockerCompose@0
       inputs:
         containerregistrytype: 'Azure Container Registry'
-        azureSubscription: 'BFSI_LGI_DevOps_Training_POC (f3f0b402-1498-4537-9728-704a780011a0)'
-        azureContainerRegistry: '{"loginServer":"aruncontainerr.azurecr.io", "id" : "/subscriptions/f3f0b402-1498-4537-9728-704a780011a0/resourceGroups/rgArun/providers/Microsoft.ContainerRegistry/registries/ArunContainerR"}'
+        azureSubscription: 'BFSI_LGI_DevOps_Training_POC(f3f0b402-1498-4537-9728-704a780011a0)'
+        azureContainerRegistry: '{"loginServer":"arunregistry.azurecr.io", "id" : "/subscriptions/f3f0b402-1498-4537-9728-704a780011a0/resourceGroups/Arun_RG/providers/Microsoft.ContainerRegistry/registries/Arunregistry"}'
         dockerComposeFile: '**/docker-compose.yml'
         action: 'Run services'
     - task: DockerCompose@0
       inputs:
         containerregistrytype: 'Azure Container Registry'
-        azureSubscription: 'BFSI_LGI_DevOps_Training_POC (f3f0b402-1498-4537-9728-704a780011a0)'
-        azureContainerRegistry: '{"loginServer":"aruncontainerr.azurecr.io", "id" : "/subscriptions/f3f0b402-1498-4537-9728-704a780011a0/resourceGroups/rgArun/providers/Microsoft.ContainerRegistry/registries/ArunContainerR"}'
+        azureSubscription: 'BFSI_LGI_DevOps_Training_POC(f3f0b402-1498-4537-9728-704a780011a0)'
+        azureContainerRegistry: '{"loginServer":"arunregistry.azurecr.io", "id" : "/subscriptions/f3f0b402-1498-4537-9728-704a780011a0/resourceGroups/Arun_RG/providers/Microsoft.ContainerRegistry/registries/Arunregistry"}'
         dockerComposeFile: '**/docker-compose.yml'
         action: 'Push services'
     - task: CopyFiles@2
